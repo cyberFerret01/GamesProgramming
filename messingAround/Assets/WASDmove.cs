@@ -31,6 +31,6 @@ public class WASDmove : MonoBehaviour
         {
             transform.position += Vector3.back * speed * Time.deltaTime;
         }
-        GameObject.Find("Box").transform.position = GameObject.Find("Camera").transform.position;
+        GameObject.Find("Area Light").transform.position = GameObject.Find("Camera").transform.position;
     }
 }

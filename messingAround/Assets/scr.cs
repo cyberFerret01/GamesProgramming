@@ -15,10 +15,15 @@ public class scr : MonoBehaviour
     private NavMeshAgent nav;
     private int destPoint;
 
+
+    public Rigidbody PlayerRB;
+    
+
     // Start is called before the first frame update
     void Start()
     {
         nav = GetComponent<NavMeshAgent>();
+        PlayerRB = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -29,7 +34,7 @@ public class scr : MonoBehaviour
         if (!nav.pathPending && nav.remainingDistance < 5)
             GoToNextPoint();
 
-
+       // StartCoroutine(move());
     }
 
 
@@ -50,5 +55,18 @@ public class scr : MonoBehaviour
         partrol++;
     }
 
+    IEnumerator move()
+    {
 
+
+        transform.position += Vector3.up * 8 * Time.deltaTime;
+
+        transform.position += transform.forward * 2 * Time.deltaTime;
+        transform.rotation = Quaternion.Euler(0, 0, 0);
+
+        if (Mathf.Approximately(PlayerRB.velocity.y, 0))
+        {
+            yield return new WaitForSeconds(1);
+        }
+    }
 }

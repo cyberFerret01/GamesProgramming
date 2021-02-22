@@ -16,10 +16,23 @@ public class scr : MonoBehaviour
     // Update is called once per frame
     private Quaternion _lookRotation;
     private Vector3 _direction;
+    private byte partrol = 0;
 
+    int[] array = new int[] { 0, 1, 2, 3 };
     // Update is called once per frame
     void Update()
     {
+        string partrolTarget = "bookcase" + array[partrol];
+        target = GameObject.Find(partrolTarget).transform;
+        Vector3 t =  target.transform.position;
+        Vector3 s = transform.position;
+
+        if (Vector3.Distance(t, s) < 5)
+        {
+            partrol++;
+            if (partrol == array.Length) partrol = 0;
+        }
+
         //find the vector pointing from our position to the target
         _direction = (target.position - transform.position).normalized;
 
@@ -30,6 +43,8 @@ public class scr : MonoBehaviour
         float step = 90; // calculate distance to move
         transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * 10000);
        StartCoroutine(move()); 
+
+       
       
     }
 

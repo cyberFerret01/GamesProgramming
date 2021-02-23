@@ -42,7 +42,7 @@ public class scr : MonoBehaviour
 
 
         void GoToNextPoint(){
-        if (partrol > 3){
+        if (partrol > 11){
 
             partrol = 0;
         }
@@ -51,7 +51,7 @@ public class scr : MonoBehaviour
         string partrolTarget = "bookcase" + array[partrol];
         target = GameObject.Find(partrolTarget).transform;
 
-         nav.destination = target.position;
+        nav.destination = target.position;
         partrol++;
     }
 

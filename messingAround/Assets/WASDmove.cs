@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class WASDmove : MonoBehaviour
 {
-    
+    //OverlapSphere size; shared with the debugger wire sphere
+    private int overlapSize = 10;
+
     int speed = 10;
     // Start is called before the first frame update
     void Start()
@@ -56,7 +58,7 @@ public class WASDmove : MonoBehaviour
     {
         Gizmos.color = Color.red;
         //Use the same vars you use to draw your Overlap SPhere to draw your Wire Sphere.
-        Gizmos.DrawWireSphere(transform.position, 10);
+        Gizmos.DrawWireSphere(transform.position, overlapSize);
     }
 
 }

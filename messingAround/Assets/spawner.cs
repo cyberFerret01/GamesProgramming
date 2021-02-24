@@ -4,27 +4,23 @@ using UnityEngine;
 using UnityEngine.UI;
 public class spawner : MonoBehaviour
 {
-    public GameObject spawnObject;
-    public Vector3 spawnPoint;
-    public int maxX = 10;
-    public int timeTilNextSpawn = 1;
-    int x = 0;
+    //OverlapSphere size; shared with the debugger wire sphere
+    private int overlapSize = 10;
     float timer = 0;
     public byte instance = 0;
-    GameObject[] aiList = new GameObject[255];
+    private GameObject[] aiList = new GameObject[254];
     public Slider Progress;
+
 
     void Start(){
         Progress = GameObject.Find("Progress").GetComponent<Slider>();
         timer = 0;
-        spawnPoint.x = x;
+
     }
 
     private void Update(){
 
-
-       
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 10);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, overlapSize);
         foreach (var hitCollider in hitColliders){
 
             for (int i = 0; i < (instance - 2); i++) {
@@ -40,17 +36,19 @@ public class spawner : MonoBehaviour
             }
         }
 
-        if (instance > 254) instance = 0;
         timer += Time.deltaTime;
         Spawn();
     }
 
     void Spawn()
     {
-        if (timer >= timeTilNextSpawn)
+        if (instance > 254)
         {
-            x = Random.Range(0, maxX);
-            spawnPoint.x = x;
+            instance = 0;
+        }
+
+        if (timer >= 5)
+        {
             aiList[instance] = Instantiate(GameObject.Find("Librarian"), transform.position+(transform.forward*-5), Quaternion.identity);
             aiList[instance].name = "Librarian"+instance;
             instance++;
@@ -58,11 +56,10 @@ public class spawner : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
+    private void OnDrawGizmos(){
+     Gizmos.color = Color.red;
      //Use the same vars you use to draw your Overlap SPhere to draw your Wire Sphere.
-     Gizmos.DrawWireSphere(transform.position, 10);
+     Gizmos.DrawWireSphere(transform.position, overlapSize);
     }
 
 }

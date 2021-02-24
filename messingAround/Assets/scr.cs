@@ -7,15 +7,8 @@ public class scr : MonoBehaviour
 {
 
     private Transform target;
-    private Quaternion _lookRotation;
-    private Vector3 _direction;
     private uint partrol = 0;
-
-    public Transform[] points;
     private NavMeshAgent nav;
-    private int destPoint;
-
-
     public Rigidbody PlayerRB;
     
 
@@ -23,10 +16,11 @@ public class scr : MonoBehaviour
     void Start()
     {
         int col = Random.Range(1, 4);
+        // make switch
+        if(col == 1) GetComponent<Renderer>().material.color =  Color.red;
+        if(col == 2) GetComponent<Renderer>().material.color = Color.green;
+        if(col == 3) GetComponent<Renderer>().material.color = Color.blue;
 
-        if(col == 1) GetComponent<Renderer>().material.color =  Color.red; //C sharp
-        if (col == 2) GetComponent<Renderer>().material.color = Color.green;
-        if (col == 3) GetComponent<Renderer>().material.color = Color.blue;
         nav = GetComponent<NavMeshAgent>();
         PlayerRB = GetComponent<Rigidbody>();
     }
@@ -41,42 +35,42 @@ public class scr : MonoBehaviour
             //FSM
 
             /*
-             * below
-             * Make it public
-             * Once reached stop
-             * Once all librarains are their delete capsule and go back to work
-             */
+                * below
+                * Make it public
+                * Once reached stop
+                * Once all librarains are their delete capsule and go back to work
+                */
             if(hitCollider.gameObject == GameObject.Find("Capsule")) nav.destination = GameObject.Find("Capsule").transform.position;
 
         }
 
 
-            if (!nav.pathPending && nav.remainingDistance < 2)
-            GoToNextPoint();
+        if (!nav.pathPending && nav.remainingDistance < 2)
+        GoToNextPoint();
 
-       // StartCoroutine(move());
+        //To do: reimpliment
+       //StartCoroutine(move()); old bounce behaviour
     }
 
 
-    int[] array = new int[] { 0, 1, 2, 3, 4, 5, 6,7,8,9,10,11 };
 
 
     void GoToNextPoint() {
-        if (partrol % 2 == 0)
-        {
+        if (partrol % 2 == 0){
+
             string partrolTarget = "bookcase" + Random.Range(0, 11);
             target = GameObject.Find(partrolTarget).transform;
-        }
-        else {
 
-        target = GameObject.Find("Home").transform;
+        }else{
+            target = GameObject.Find("Home").transform;
         }
 
         nav.destination = target.position;
         partrol++;
     }
 
-    IEnumerator move()
+
+    /*IEnumerator move()
     {
 
 
@@ -89,5 +83,5 @@ public class scr : MonoBehaviour
         {
             yield return new WaitForSeconds(1);
         }
-    }
+    }*/
 }

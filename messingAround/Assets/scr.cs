@@ -9,7 +9,7 @@ public class scr : MonoBehaviour
     private Transform target;
     private Quaternion _lookRotation;
     private Vector3 _direction;
-    private byte partrol = 0;
+    private uint partrol = 0;
 
     public Transform[] points;
     private NavMeshAgent nav;
@@ -22,6 +22,11 @@ public class scr : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        int col = Random.Range(1, 4);
+
+        if(col == 1) GetComponent<Renderer>().material.color =  Color.red; //C sharp
+        if (col == 2) GetComponent<Renderer>().material.color = Color.green;
+        if (col == 3) GetComponent<Renderer>().material.color = Color.blue;
         nav = GetComponent<NavMeshAgent>();
         PlayerRB = GetComponent<Rigidbody>();
     }
@@ -46,7 +51,7 @@ public class scr : MonoBehaviour
         }
 
 
-            if (!nav.pathPending && nav.remainingDistance < 5)
+            if (!nav.pathPending && nav.remainingDistance < 2)
             GoToNextPoint();
 
        // StartCoroutine(move());

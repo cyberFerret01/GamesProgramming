@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class spawner : MonoBehaviour
 {
     public GameObject spawnObject;
@@ -12,14 +12,17 @@ public class spawner : MonoBehaviour
     float timer = 0;
     public byte instance = 0;
     GameObject[] aiList = new GameObject[255];
+    public Slider Progress;
 
     void Start(){
-     
+        Progress = GameObject.Find("Progress").GetComponent<Slider>();
         timer = 0;
         spawnPoint.x = x;
     }
 
     private void Update(){
+
+
        
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, 10);
         foreach (var hitCollider in hitColliders){
@@ -31,6 +34,7 @@ public class spawner : MonoBehaviour
 
                 }else if(hitCollider.name == aiList[i].name){
                     Destroy(aiList[i]);
+                    Progress.value += 10;
                     aiList[i] = null;
                 }
             }

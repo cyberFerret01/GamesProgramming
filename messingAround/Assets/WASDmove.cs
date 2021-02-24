@@ -19,18 +19,28 @@ public class WASDmove : MonoBehaviour
     {
         GameObject player = GameObject.Find("Camera");
 
+        movement();
+
+        //GameObject.Find("Area Light").transform.position = GameObject.Find("Camera").transform.position;
+
+    }
+
+    void movement() {
+
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            transform.position += Vector3.left * speed * Time.deltaTime;
+            transform.Rotate(-transform.up * 30 * Time.deltaTime);
+            //transform.position += Vector3.left * speed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            transform.position += Vector3.right * speed * Time.deltaTime;
+            transform.Rotate(transform.up * 30 * Time.deltaTime);
+            //transform.position += Vector3.right * speed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.UpArrow))
         {
             transform.position += transform.forward * speed * Time.deltaTime;
-            
+
         }
         if (Input.GetKey(KeyCode.DownArrow))
         {
@@ -49,10 +59,7 @@ public class WASDmove : MonoBehaviour
 
         }
 
-        //GameObject.Find("Area Light").transform.position = GameObject.Find("Camera").transform.position;
-
     }
-
 
     private void OnDrawGizmos()
     {

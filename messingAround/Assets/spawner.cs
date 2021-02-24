@@ -7,7 +7,7 @@ public class spawner : MonoBehaviour
     //OverlapSphere size; shared with the debugger wire sphere
     private int overlapSize = 10;
     float timer = 0;
-    public byte instance = 0;
+    private byte instance = 0;
     private GameObject[] aiList = new GameObject[254];
     public Slider Progress;
 
@@ -42,7 +42,7 @@ public class spawner : MonoBehaviour
 
     void Spawn()
     {
-        if (instance > 254)
+        if (instance +1 >= byte.MaxValue)
         {
             instance = 0;
         }

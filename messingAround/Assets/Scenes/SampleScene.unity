@@ -1956,10 +1956,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5d700558de46e444990dfe5f5e141d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnObject: {fileID: 0}
-  spawnPoint: {x: 0, y: 0, z: 0}
-  maxX: 10
-  timeTilNextSpawn: 5
   instance: 0
   Progress: {fileID: 0}
 --- !u!1001 &860042049
@@ -2853,7 +2849,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 732d04222746b4f4ea813e3839f151c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  points: []
   PlayerRB: {fileID: 0}
 --- !u!195 &1425516046
 NavMeshAgent:
@@ -3559,7 +3554,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -200}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1822096576
@@ -3711,8 +3706,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: -5, y: 0}
-  m_SizeDelta: {x: -20, y: 0}
+  m_AnchoredPosition: {x: 0.5, y: 0}
+  m_SizeDelta: {x: -9, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &2041970153
 PrefabInstance:

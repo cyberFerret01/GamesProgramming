@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class scr : MonoBehaviour
+public class LibrarianAI : MonoBehaviour
 {
 
     private Transform target;

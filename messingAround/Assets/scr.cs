@@ -30,26 +30,42 @@ public class scr : MonoBehaviour
     void Update()
     {
 
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 7);
+        foreach (var hitCollider in hitColliders)
+        {
+            //FSM
 
-        if (!nav.pathPending && nav.remainingDistance < 5)
+            /*
+             * below
+             * Make it public
+             * Once reached stop
+             * Once all librarains are their delete capsule and go back to work
+             */
+            if(hitCollider.gameObject == GameObject.Find("Capsule")) nav.destination = GameObject.Find("Capsule").transform.position;
+
+        }
+
+
+            if (!nav.pathPending && nav.remainingDistance < 5)
             GoToNextPoint();
 
        // StartCoroutine(move());
     }
 
 
-    int[] array = new int[] { 0, 1, 2, 3 };
+    int[] array = new int[] { 0, 1, 2, 3, 4, 5, 6,7,8,9,10,11 };
 
 
-        void GoToNextPoint(){
-        if (partrol > 11){
-
-            partrol = 0;
+    void GoToNextPoint() {
+        if (partrol % 2 == 0)
+        {
+            string partrolTarget = "bookcase" + Random.Range(0, 11);
+            target = GameObject.Find(partrolTarget).transform;
         }
+        else {
 
-
-        string partrolTarget = "bookcase" + array[partrol];
-        target = GameObject.Find(partrolTarget).transform;
+        target = GameObject.Find("Home").transform;
+        }
 
         nav.destination = target.position;
         partrol++;

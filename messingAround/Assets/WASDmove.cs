@@ -27,15 +27,28 @@ public class WASDmove : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            transform.position += Vector3.forward * speed * Time.deltaTime;
+            transform.position += transform.forward * speed * Time.deltaTime;
             
         }
         if (Input.GetKey(KeyCode.DownArrow))
         {
-            transform.position += Vector3.back * speed * Time.deltaTime;
+            transform.position -= transform.forward * speed * Time.deltaTime;
         }
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            transform.Rotate(-transform.up * 30 * Time.deltaTime);
+
+        }
+
+        if (Input.GetKey(KeyCode.D))
+        {
+            transform.Rotate(transform.up * 30 * Time.deltaTime);
+
+        }
+
         //GameObject.Find("Area Light").transform.position = GameObject.Find("Camera").transform.position;
-       
+
     }
 
 

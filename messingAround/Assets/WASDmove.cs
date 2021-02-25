@@ -6,20 +6,30 @@ public class WASDmove : MonoBehaviour
 {
     //OverlapSphere size; shared with the debugger wire sphere
     private int overlapSize = 10;
-
-    int speed = 10;
+        int speed = 10;
+    Rigidbody playerRigidBody;
     // Start is called before the first frame update
     void Start()
     {
-         
+        playerRigidBody = gameObject.AddComponent<Rigidbody>(); // Add the rigidbody.
+        playerRigidBody.mass = short.MaxValue;
+        playerRigidBody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+       // playerRigidBody.useGravity = false;
+        playerRigidBody.drag = 1;
+        playerRigidBody.constraints = RigidbodyConstraints.FreezeRotation;
     }
 
     // Update is called once per frame
     void Update()
     {
-        GameObject player = GameObject.Find("Camera");
 
-        movement();
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 10);
+        foreach (var hitCollider in hitColliders){ 
+        
+        }
+
+
+            movement();
 
         //GameObject.Find("Area Light").transform.position = GameObject.Find("Camera").transform.position;
 
@@ -39,12 +49,16 @@ public class WASDmove : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            transform.position += transform.forward * speed * Time.deltaTime;
+
+            playerRigidBody.AddForce(transform.forward*10 - playerRigidBody.velocity, ForceMode.VelocityChange);
+           // playerRigidBody.AddForce(playerRigidBody.position + transform.forward); -- misses collisions
+
 
         }
         if (Input.GetKey(KeyCode.DownArrow))
         {
-            transform.position -= transform.forward * speed * Time.deltaTime;
+            playerRigidBody.AddForce(transform.forward * -10 - playerRigidBody.velocity, ForceMode.VelocityChange);
+            //transform.position -= transform.forward * speed * Time.deltaTime;
         }
 
         if (Input.GetKey(KeyCode.A))

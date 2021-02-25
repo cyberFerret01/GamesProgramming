@@ -12,8 +12,40 @@ public class spawner : MonoBehaviour
     private GameObject[] aiList = new GameObject[254];
     public Slider Progress;
 
+    public static Color[] bookShelfOG = new Color[12];
+
 
     void Start(){
+
+
+        for (int i = 0; i < 12; i++)
+        {
+            GameObject shelf = GameObject.Find("bookcase" + i);
+            int col = Random.Range(1, 4);
+            // make switch
+
+            switch (col)
+            {
+                case 1:
+                    bookShelfOG[i] = Color.red;
+                    break;
+                case 2:
+                    bookShelfOG[i] = Color.green;
+                    break;
+                case 3:
+                    bookShelfOG[i] = Color.blue;
+                    break;
+                default:
+                    bookShelfOG[i] = Color.blue;
+                    break;
+
+
+            }
+            shelf.gameObject.GetComponent<Renderer>().material.color = bookShelfOG[i];
+
+
+        }
+
         Progress = GameObject.Find("Progress").GetComponent<Slider>();
         Progress.value = Progress.maxValue;
         timer = 0;
@@ -78,7 +110,7 @@ public class spawner : MonoBehaviour
             timePassed = timer;
 
 
-            if (Mathf.Floor(timer % 10) == 0) Progress.value -= 10;
+            if (Mathf.Floor(timer % 5) == 0) Progress.value -= 20;
             Debug.Log(timer);
         }
     }

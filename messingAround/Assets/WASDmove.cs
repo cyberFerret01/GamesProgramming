@@ -8,6 +8,7 @@ public class WASDmove : MonoBehaviour
     private int overlapSize = 5;
         int speed = 10;
     Rigidbody playerRigidBody;
+    Color book = Color.red;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,12 +24,14 @@ public class WASDmove : MonoBehaviour
     void Update()
     {
         //Debug.Log(playerRigidBody.collisionDetectionMode);
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 10);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, overlapSize);
         foreach (var hitCollider in hitColliders){
 
             if (hitCollider.name.Contains("book")) {
                 if (Input.GetKey(KeyCode.E)){
-                    hitCollider.gameObject.GetComponent<Renderer>().material.color = Color.red;
+                    moveBooks(hitCollider);
+                    //hitCollider.gameObject.GetComponent<Renderer>().material.color = Color.red;
+                    //hitCollider.gameObject.
                 }
             }
 
@@ -39,6 +42,19 @@ public class WASDmove : MonoBehaviour
 
         //GameObject.Find("Area Light").transform.position = GameObject.Find("Camera").transform.position;
 
+    }
+
+    void moveBooks(Collider bookIn) {
+
+        Color bookShelf = bookIn.gameObject.GetComponent<Renderer>().material.color; ;
+
+        if (book == Color.clear){
+            book = bookShelf;
+        }
+        else{
+            bookShelf = book;
+            book = Color.clear;
+        }
     }
 
     void movement() {

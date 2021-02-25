@@ -5,11 +5,13 @@ using UnityEngine.AI;
 
 public class LibrarianAI : MonoBehaviour
 {
-
+    private int overlapSize = 3;
     private Transform target;
     private uint partrol = 0;
     private NavMeshAgent nav;
     public Rigidbody PlayerRB;
+
+  
     
 
     // Start is called before the first frame update
@@ -29,7 +31,7 @@ public class LibrarianAI : MonoBehaviour
     void Update()
     {
 
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 7);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, overlapSize);
         foreach (var hitCollider in hitColliders)
         {
             //FSM
@@ -40,9 +42,11 @@ public class LibrarianAI : MonoBehaviour
                 * Once reached stop
                 * Once all librarains are their delete capsule and go back to work
                 */
-            if(hitCollider.gameObject == GameObject.Find("Capsule")) nav.destination = GameObject.Find("Capsule").transform.position;
+            if (hitCollider.name.Contains("Capsule")) nav.velocity = Vector3.zero;
+            //if (hitCollider.name.Contains("book")) Debug.Log(hitCollider.gameObject.GetComponent<Renderer>().material.color);
+            
 
-        }
+            }
 
 
         if (!nav.pathPending && nav.remainingDistance < 2)
@@ -69,6 +73,13 @@ public class LibrarianAI : MonoBehaviour
         partrol++;
     }
 
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        //Use the same vars you use to draw your Overlap SPhere to draw your Wire Sphere.
+        Gizmos.DrawWireSphere(transform.position, overlapSize);
+    }
 
     /*IEnumerator move()
     {

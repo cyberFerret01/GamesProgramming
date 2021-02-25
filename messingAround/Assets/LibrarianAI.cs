@@ -47,7 +47,12 @@ public class LibrarianAI : MonoBehaviour
                 * Once all librarains are their delete capsule and go back to work
                 */
             if (hitCollider.name.Contains("Capsule")) nav.velocity = Vector3.zero;
-            if (hitCollider.name.Contains("book") && hitCollider.name == partrolTarget) {
+            if (hitCollider.name.Contains("book") && hitCollider.name == partrolTarget && q >1)
+            {
+                newstop[1].gameObject.GetComponent<Renderer>().material.color = actualColor;
+            }
+
+                if (hitCollider.name.Contains("book") && hitCollider.name == partrolTarget) {
 
                 //bookcase(00)
                 string[] str = hitCollider.name.Split('e');
@@ -65,7 +70,7 @@ public class LibrarianAI : MonoBehaviour
 
                 actualColor = duplicatedArray[caseNo];
                 if (hitCollider.gameObject.GetComponent<Renderer>().material.color == actualColor){
-                    Debug.Log("Correct colour");
+                    //Debug.Log("Correct colour");
                 }else{
                     Debug.Log("Wrong colour");
 
@@ -73,7 +78,7 @@ public class LibrarianAI : MonoBehaviour
 
                         if (actualColor == duplicatedArray[j] && j != caseNo) {
                             string imGoinTo = "bookcase" + j;
-                            Debug.LogWarning(imGoinTo);
+                            //Debug.LogWarning(imGoinTo);
                             newstop[0] = GameObject.Find(imGoinTo);
                             newstop[1] = hitCollider.gameObject;
                             regularPatrol = false;
@@ -128,8 +133,7 @@ public class LibrarianAI : MonoBehaviour
             nav.destination = newstop[q].transform.position;
             q++;
             if (q == 2){
-                newstop[1].gameObject.GetComponent<Renderer>().material.color = actualColor;
-                q = 0;
+
                 regularPatrol = true; 
             }
 

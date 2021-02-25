@@ -100,7 +100,7 @@ public class spawner : MonoBehaviour
          * is 10 less than 1
          */
 
-        if (timePassed +20 < timer)
+        if (timePassed +7 < timer)
         {
             aiList[instance] = Instantiate(GameObject.Find("Librarian"), transform.position+(transform.forward*-5), Quaternion.identity);
             aiList[instance].name = "Librarian"+instance;

@@ -5,7 +5,7 @@ using UnityEngine;
 public class WASDmove : MonoBehaviour
 {
     //OverlapSphere size; shared with the debugger wire sphere
-    private int overlapSize = 5;
+    private int overlapSize =2;
         int speed = 10;
     Rigidbody playerRigidBody;
     Color book = Color.red;

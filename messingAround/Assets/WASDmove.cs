@@ -46,15 +46,11 @@ public class WASDmove : MonoBehaviour
 
     void moveBooks(Collider bookIn) {
 
-        Color bookShelf = bookIn.gameObject.GetComponent<Renderer>().material.color; ;
+        Color booknew = bookIn.gameObject.GetComponent<Renderer>().material.color;
+        bookIn.gameObject.GetComponent<Renderer>().material.color = book;
+        book = booknew;
+        
 
-        if (book == Color.clear){
-            book = bookShelf;
-        }
-        else{
-            bookShelf = book;
-            book = Color.clear;
-        }
     }
 
     void movement() {

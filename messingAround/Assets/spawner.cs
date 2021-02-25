@@ -38,9 +38,7 @@ public class spawner : MonoBehaviour
                 default:
                     bookShelfOG[i] = Color.blue;
                     break;
-
-
-            }
+             }
             shelf.gameObject.GetComponent<Renderer>().material.color = bookShelfOG[i];
 
 
@@ -102,7 +100,7 @@ public class spawner : MonoBehaviour
          * is 10 less than 1
          */
 
-        if (timePassed +5 < timer)
+        if (timePassed +20 < timer)
         {
             aiList[instance] = Instantiate(GameObject.Find("Librarian"), transform.position+(transform.forward*-5), Quaternion.identity);
             aiList[instance].name = "Librarian"+instance;
@@ -111,7 +109,7 @@ public class spawner : MonoBehaviour
 
 
             if (Mathf.Floor(timer % 5) == 0) Progress.value -= 20;
-            Debug.Log(timer);
+            //Debug.Log(timer);
         }
     }
 

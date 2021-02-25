@@ -33,7 +33,7 @@ public class LibrarianAI : MonoBehaviour
         foreach (var hitCollider in hitColliders)
         {
             //FSM
-
+            //when hitting player stop
             /*
                 * below
                 * Make it public

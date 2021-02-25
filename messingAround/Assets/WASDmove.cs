@@ -5,7 +5,7 @@ using UnityEngine;
 public class WASDmove : MonoBehaviour
 {
     //OverlapSphere size; shared with the debugger wire sphere
-    private int overlapSize = 10;
+    private int overlapSize = 5;
         int speed = 10;
     Rigidbody playerRigidBody;
     // Start is called before the first frame update
@@ -22,10 +22,16 @@ public class WASDmove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        //Debug.Log(playerRigidBody.collisionDetectionMode);
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, 10);
-        foreach (var hitCollider in hitColliders){ 
-        
+        foreach (var hitCollider in hitColliders){
+
+            if (hitCollider.name.Contains("book")) {
+                if (Input.GetKey(KeyCode.E)){
+                    hitCollider.gameObject.GetComponent<Renderer>().material.color = Color.red;
+                }
+            }
+
         }
 
 

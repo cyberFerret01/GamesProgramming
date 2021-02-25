@@ -17,6 +17,7 @@ public class LibrarianAI : MonoBehaviour
     private int q = 0;
 
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -77,6 +78,7 @@ public class LibrarianAI : MonoBehaviour
                     for (int j =0; j < duplicatedArray.Length; j++) {
 
                         if (actualColor == duplicatedArray[j] && j != caseNo) {
+                            q = 0;
                             string imGoinTo = "bookcase" + j;
                             //Debug.LogWarning(imGoinTo);
                             newstop[0] = GameObject.Find(imGoinTo);
@@ -106,6 +108,9 @@ public class LibrarianAI : MonoBehaviour
 
         //To do: reimpliment
        //StartCoroutine(move()); old bounce behaviour
+
+
+
     }
 
 

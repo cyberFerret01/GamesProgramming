@@ -14,7 +14,7 @@ public class WASDmove : MonoBehaviour
         playerRigidBody = gameObject.AddComponent<Rigidbody>(); // Add the rigidbody.
         playerRigidBody.mass = short.MaxValue;
         playerRigidBody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
-       // playerRigidBody.useGravity = false;
+        //playerRigidBody.useGravity = false;
         playerRigidBody.drag = 1;
         playerRigidBody.constraints = RigidbodyConstraints.FreezeRotation;
     }
@@ -76,18 +76,6 @@ public class WASDmove : MonoBehaviour
         {
             playerRigidBody.AddForce(transform.forward * -10 - playerRigidBody.velocity, ForceMode.VelocityChange);
             //transform.position -= transform.forward * speed * Time.deltaTime;
-        }
-
-        if (Input.GetKey(KeyCode.A))
-        {
-            transform.Rotate(-transform.up * 30 * Time.deltaTime);
-
-        }
-
-        if (Input.GetKey(KeyCode.D))
-        {
-            transform.Rotate(transform.up * 30 * Time.deltaTime);
-
         }
 
     }

@@ -5,8 +5,7 @@ using UnityEngine;
 public class WASDmove : MonoBehaviour
 {
     //OverlapSphere size; shared with the debugger wire sphere
-    private int overlapSize =2;
-        int speed = 10;
+    private int overlapSize = 2;
     Rigidbody playerRigidBody;
     Color book = Color.red;
     // Start is called before the first frame update
@@ -57,12 +56,12 @@ public class WASDmove : MonoBehaviour
 
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            transform.Rotate(-transform.up * 30 * Time.deltaTime);
+            transform.Rotate(-transform.up * 60 * Time.deltaTime);
             //transform.position += Vector3.left * speed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            transform.Rotate(transform.up * 30 * Time.deltaTime);
+            transform.Rotate(transform.up * 60 * Time.deltaTime);
             //transform.position += Vector3.right * speed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.UpArrow))

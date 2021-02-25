@@ -6,19 +6,22 @@ using UnityEngine.AI;
 public class LibrarianAI : MonoBehaviour
 {
     private int overlapSize = 3;
-    private Transform target;
-    private uint partrol = 0;
     private NavMeshAgent nav;
-    public Rigidbody PlayerRB;
-    private string partrolTarget = "bookcase0";
-    private bool regularPatrol = true;
-    private GameObject [] newstop = new GameObject[3];
-    private Color actualColor = Color.red;
-    private int q = 0;
+
+    //ai bookcase
+        //movement
+        private Transform target;
+        private string partrolTarget = "bookcase0";
+        private uint partrol = 0;
+        private bool regularPatrol = true;
+    //to fix case
+        private int q = 0;
+        private GameObject [] newstop = new GameObject[3];
+    //true color of case
+        private Color actualColor = Color.red;
 
 
-
-    // Start is called before the first frame update
+    
     void Start()
     {
         int col = Random.Range(1, 4);
@@ -28,7 +31,6 @@ public class LibrarianAI : MonoBehaviour
         if(col == 3) GetComponent<Renderer>().material.color = Color.blue;
 
         nav = GetComponent<NavMeshAgent>();
-        PlayerRB = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -36,71 +38,10 @@ public class LibrarianAI : MonoBehaviour
     {
 
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, overlapSize);
-        foreach (var hitCollider in hitColliders)
-        {
-            int caseNo = 1;
-            //FSM
-            //when hitting player stop
-            /*
-                * below
-                * Make it public
-                * Once reached stop
-                * Once all librarains are their delete capsule and go back to work
-                */
-            if (hitCollider.name.Contains("Capsule")) nav.velocity = Vector3.zero;
-            if (hitCollider.name.Contains("book") && hitCollider.name == partrolTarget && q >1)
-            {
-                newstop[1].gameObject.GetComponent<Renderer>().material.color = actualColor;
-            }
+        foreach (var hitCollider in hitColliders){
 
-                if (hitCollider.name.Contains("book") && hitCollider.name == partrolTarget) {
-
-                //bookcase(00)
-                string[] str = hitCollider.name.Split('e');
-
-                //Debug.Log(str[1]);
-
-                try{
-                    caseNo = int.Parse(str[1]);
-                }
-                catch {
-                    Debug.LogError("Lib found non bookcase");
-                }
-
-                Color [] duplicatedArray = spawner.bookShelfOG;
-
-                actualColor = duplicatedArray[caseNo];
-                if (hitCollider.gameObject.GetComponent<Renderer>().material.color == actualColor){
-                    //Debug.Log("Correct colour");
-                }else{
-                    Debug.Log("Wrong colour");
-
-                    for (int j =0; j < duplicatedArray.Length; j++) {
-
-                        if (actualColor == duplicatedArray[j] && j != caseNo) {
-                            q = 0;
-                            string imGoinTo = "bookcase" + j;
-                            //Debug.LogWarning(imGoinTo);
-                            newstop[0] = GameObject.Find(imGoinTo);
-                            newstop[1] = hitCollider.gameObject;
-                            regularPatrol = false;
-                            
-                            break;
-                        }
-                    
-                    }
-
-
-                    //go to correct shelf
-                    //come back
-                    //correct colour
-                }
-
-
-            }
-            
-
-            }
+            collisionFSM(hitCollider);
+        }
 
 
         if (!nav.pathPending && nav.remainingDistance < overlapSize-1)
@@ -114,7 +55,78 @@ public class LibrarianAI : MonoBehaviour
     }
 
 
+    void collisionFSM(Collider hitCollider) {
 
+        int caseNo = 1;
+        //FSM
+        //when hitting player stop
+        /*
+            * below
+            * Make it public
+            * Once reached stop
+            * Once all librarains are their delete capsule and go back to work
+            */
+        if (hitCollider.name.Contains("Capsule")) nav.velocity = Vector3.zero;
+        if (hitCollider.name.Contains("book") && hitCollider.name == partrolTarget && q > 1)
+        {
+            newstop[1].gameObject.GetComponent<Renderer>().material.color = actualColor;
+        }
+
+        if (hitCollider.name.Contains("book") && hitCollider.name == partrolTarget)
+        {
+
+            //bookcase(00)
+            string[] str = hitCollider.name.Split('e');
+
+            //Debug.Log(str[1]);
+
+            try
+            {
+                caseNo = int.Parse(str[1]);
+            }
+            catch
+            {
+                Debug.LogError("Lib found non bookcase");
+            }
+
+            Color[] duplicatedArray = spawner.bookShelfOG;
+
+            actualColor = duplicatedArray[caseNo];
+            if (hitCollider.gameObject.GetComponent<Renderer>().material.color == actualColor)
+            {
+                //Debug.Log("Correct colour");
+            }
+            else
+            {
+                Debug.Log("Wrong colour");
+
+                for (int j = 0; j < duplicatedArray.Length; j++)
+                {
+
+                    if (actualColor == duplicatedArray[j] && j != caseNo)
+                    {
+                        q = 0;
+                        string imGoinTo = "bookcase" + j;
+                        //Debug.LogWarning(imGoinTo);
+                        newstop[0] = GameObject.Find(imGoinTo);
+                        newstop[1] = hitCollider.gameObject;
+                        regularPatrol = false;
+
+                        break;
+                    }
+
+                }
+
+
+                //go to correct shelf
+                //come back
+                //correct colour
+            }
+
+
+        }
+
+    }
 
     void GoToNextPoint() {
         if (regularPatrol)

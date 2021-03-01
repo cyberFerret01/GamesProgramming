@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEditor;
+//using UnityEditor;
 public class spawner : MonoBehaviour
 {
     //OverlapSphere size; shared with the debugger wire sphere
@@ -22,7 +22,7 @@ public class spawner : MonoBehaviour
 
     void Start(){
 
-        intro();
+        //intro();
 
         for (int i = 0; i < 12; i++)
         {
@@ -80,15 +80,16 @@ public class spawner : MonoBehaviour
 
         Spawn();
         timerRest();
-        winLoseCon();
+       // winLoseCon();
 
         if(Mathf.Floor(timer%8) ==0) Progress.value -= 1;
     }
-    void intro() {
+    /*
+   void intro() {
         EditorUtility.DisplayDialog("", "Buttons: Up(Forward),Down(Back),Left/Right(Look),E - sabotage", "ok", "no");
         EditorUtility.DisplayDialog("", "Distract the librarians and sabotage the library", "ok", "no");
     }
-    void winLoseCon() {
+   void winLoseCon() {
         if (Progress.value > Progress.maxValue - 1 && !loseMeg)
         {
             EditorUtility.DisplayDialog("", "you Lose!", "ok", "no");
@@ -100,6 +101,7 @@ public class spawner : MonoBehaviour
             winMsg = true;
         }
     }
+    */
     void timerRest() {
 
         //stops timers/counters from going beyond their max val
